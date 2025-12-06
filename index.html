@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureConnect - Professional Video Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-quaternary: #30363d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #1f6feb;
+            --accent-success: #3fb950;
+            --accent-warning: #d29922;
+            --accent-error: #f85149;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-tertiary: #6e7681;
+            --border-primary: #30363d;
+            --border-secondary: #21262d;
+        }
+
+        .light {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #ffffff;
+            --bg-quaternary: #f6f8fa;
+            --accent-primary: #0969da;
+            --accent-secondary: #0550ae;
+            --accent-success: #1a7f37;
+            --accent-warning: #9a6700;
+            --accent-error: #cf222e;
+            --text-primary: #24292f;
+            --text-secondary: #57606a;
+            --text-tertiary: #6e7781;
+            --border-primary: #d0d7de;
+            --border-secondary: #d8dee4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(88, 166, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(63, 185, 80, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-quaternary);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* Main Container */
+        .main-container {
+            margin-top: 64px;
+            min-height: calc(100vh - 64px);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Join Screen */
+        .join-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 64px);
+            padding: 24px;
+        }
+
+        .join-card {
+            width: 100%;
+            max-width: 520px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 16px;
+            padding: 48px 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .join-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .join-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .join-subtitle {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            height: 44px;
+            padding: 0 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .hash-input {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-hint {
+            margin-top: 8px;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .example-hash {
+            display: inline-block;
+            margin-top: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .example-hash:hover {
+            color: var(--accent-secondary);
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            height: 48px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-banner {
+            display: none;
+            padding: 12px 16px;
+            background: rgba(248, 81, 73, 0.1);
+            border: 1px solid var(--accent-error);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: var(--accent-error);
+            font-size: 14px;
+            animation: shake 0.4s ease;
+        }
+
+        .error-banner.active {
+            display: block;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        /* Call Screen */
+        .call-screen {
+            display: none;
+            height: calc(100vh - 64px);
+            background: var(--bg-primary);
+        }
+
+        .call-screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-grid {
+            flex: 1;
+            display: grid;
+            gap: 12px;
+            padding: 12px;
+            grid-template-columns: 1fr;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: relative;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-primary);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+        }
+
+        .video-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .video-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .video-status {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .video-info {
+            padding: 8px 12px;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .connection-quality {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 6px;
+            font-size: 12px;
+            color: white;
+        }
+
+        .quality-bars {
+            display: flex;
+            gap: 2px;
+            align-items: flex-end;
+        }
+
+        .quality-bar {
+            width: 3px;
+            background: var(--accent-success);
+            border-radius: 2px;
+        }
+
+        .quality-bar:nth-child(1) { height: 8px; }
+        .quality-bar:nth-child(2) { height: 12px; }
+        .quality-bar:nth-child(3) { height: 16px; }
+        .quality-bar:nth-child(4) { height: 20px; }
+
+        /* Control Bar */
+        .control-bar {
+            height: 88px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            gap: 16px;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+            font-size: 20px;
+            position: relative;
+        }
+
+        .control-btn:hover {
+            background: var(--bg-quaternary);
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+        }
+
+        .control-btn.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .control-btn.danger {
+            background: var(--accent-error);
+            border-color: var(--accent-error);
+            color: white;
+        }
+
+        .control-btn.danger:hover {
+            background: #d32f2f;
+            border-color: #d32f2f;
+        }
+
+        .call-timer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .call-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .call-hash {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .participant-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Wire Connect Button */
+        .wire-connect-section {
+            display: none;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-primary);
+        }
+
+        .wire-connect-section.active {
+            display: block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .wire-banner {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .wire-banner-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .wire-banner-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 16px;
+        }
+
+        .btn-wire {
+            width: 100%;
+            height: 56px;
+            background: white;
+            color: var(--accent-primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .btn-wire:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-wire:active {
+            transform: translateY(0);
+        }
+
+        .wire-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast-content {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 24px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 440px;
+            width: 100%;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .modal-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            height: 44px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn.secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-primary);
+        }
+
+        .modal-btn.secondary:hover {
+            background: var(--bg-quaternary);
+        }
+
+        .modal-btn.danger {
+            background: var(--accent-error);
+            color: white;
+        }
+
+        .modal-btn.danger:hover {
+            background: #d32f2f;
+        }
+
+        /* Connecting Screen */
+        .connecting-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 17, 23, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            backdrop-filter: blur(8px);
+        }
+
+        .connecting-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .connecting-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(88, 166, 255, 0.2);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .connecting-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .connecting-subtext {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .connecting-steps {
+            margin-top: 24px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .connecting-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .connecting-step.active {
+            color: var(--accent-primary);
+        }
+
+        .connecting-step.done {
+            color: var(--accent-success);
+        }
+
+        .step-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .connecting-step.active .step-icon {
+            border-color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .connecting-step.done .step-icon {
+            border-color: var(--accent-success);
+            background: var(--accent-success);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 16px;
+            }
+
+            .join-card {
+                padding: 32px 24px;
+            }
+
+            .join-title {
+                font-size: 24px;
+            }
+
+            .control-bar {
+                padding: 0 16px;
+                height: 80px;
+            }
+
+            .control-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+
+            .call-info {
+                display: none;
+            }
+
+            .video-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .video-name {
+                font-size: 18px;
+            }
+
+            .toast {
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                display: none;
+            }
+
+            .control-group {
+                gap: 6px;
+            }
+
+            .modal {
+                padding: 24px;
+            }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            background: rgba(13, 17, 23, 0.95);
+            color: white;
+            font-size: 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-section">
+            <div class="logo-icon">SC</div>
+            <div class="logo-text">SecureConnect</div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle tooltip" data-tooltip="Toggle theme" id="themeToggle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Join Screen -->
+        <div class="join-screen" id="joinScreen">
+            <div class="join-card">
+                <div class="join-header">
+                    <h1 class="join-title">Join Video Call</h1>
+                    <p class="join-subtitle">Enter your unique call hash to join the secure video session</p>
+                </div>
+
+                <div class="error-banner" id="errorBanner"></div>
+
+                <form id="joinForm">
+                    <div class="form-group">
+                        <label class="form-label" for="callHash">Session Hash Code</label>
+                        <input
+                            type="text"
+                            id="callHash"
+                            class="form-input hash-input"
+                            placeholder="LG-XXXXXXXX-XXXXX"
+                            required
+                            autocomplete="off"
+                        >
+                        <div class="input-hint">
+                            🔐 Enter your authorized session hash code to access the secure video call
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="displayName">Display Name</label>
+                        <input
+                            type="text"
+                            id="displayName"
+                            class="form-input"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                            <polygon points="23 7 16 12 23 17 23 7"/>
+                        </svg>
+                        Join Call
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Call Screen -->
+        <div class="call-screen" id="callScreen">
+            <div class="video-grid" id="videoGrid">
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="video-avatar" id="videoAvatar">U</div>
+                        <div class="video-name" id="videoName">User</div>
+                        <div class="video-status">
+                            <span class="status-dot"></span>
+                            <span id="videoStatus">Connected</span>
+                        </div>
+                    </div>
+                    <div class="video-overlay">
+                        <div class="video-info" id="videoInfo">You</div>
+                        <div class="connection-quality">
+                            <div class="quality-bars">
+                                <div class="quality-bar"></div>
+                                <div class="quality-bar"></div>
+                                <div class="quality-bar"></div>
+                                <div class="quality-bar"></div>
+                            </div>
+                            Excellent
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-bar">
+                <div class="control-group">
+                    <button class="control-btn tooltip" data-tooltip="Microphone" id="micBtn">
+                        🎤
+                    </button>
+                    <button class="control-btn tooltip" data-tooltip="Camera" id="cameraBtn">
+                        📹
+                    </button>
+                    <button class="control-btn tooltip" data-tooltip="Share screen" id="screenBtn">
+                        🖥️
+                    </button>
+                </div>
+
+                <div class="call-timer" id="callTimer">00:00</div>
+
+                <div class="control-group">
+                    <div class="call-info">
+                        <div class="call-hash" id="callHashDisplay"></div>
+                        <div class="participant-count">
+                            👥 <span id="participantCount">1</span> participant
+                        </div>
+                    </div>
+                    <button class="control-btn danger tooltip" data-tooltip="Leave call" id="leaveBtn">
+                        📞
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wire Connect Section -->
+            <div class="wire-connect-section" id="wireConnectSection">
+                <div class="wire-banner">
+                    <div class="wire-banner-title">🔒 Secure Communication Ready</div>
+                    <div class="wire-banner-subtitle">Continue your conversation with Keanu Reeves on Wire for end-to-end encrypted messaging</div>
+                    <a href="https://account.wire.com/user-profile/?id=405f682a-de27-4aca-8b13-2833e574ce8e@wire.com" target="_blank" class="btn-wire">
+                        <div class="wire-icon">W</div>
+                        Connect on Wire Messenger
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connecting Overlay -->
+    <div class="connecting-overlay" id="connectingOverlay">
+        <div class="connecting-content">
+            <div class="spinner"></div>
+            <div class="connecting-text">Connecting to call...</div>
+            <div class="connecting-subtext">Please wait while we establish a secure connection</div>
+
+            <div class="connecting-steps" id="connectingSteps">
+                <div class="connecting-step" data-step="1">
+                    <div class="step-icon">1</div>
+                    <span>Validating credentials</span>
+                </div>
+                <div class="connecting-step" data-step="2">
+                    <div class="step-icon">2</div>
+                    <span>Establishing WebRTC connection</span>
+                </div>
+                <div class="connecting-step" data-step="3">
+                    <div class="step-icon">3</div>
+                    <span>Initializing media streams</span>
+                </div>
+                <div class="connecting-step" data-step="4">
+                    <div class="step-icon">4</div>
+                    <span>Joining call session</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h2 class="modal-title" id="modalTitle">Confirm Action</h2>
+            <p class="modal-text" id="modalText">Are you sure you want to proceed?</p>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="modalCancel">Cancel</button>
+                <button class="modal-btn danger" id="modalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon">ℹ️</div>
+        <div class="toast-content" id="toastContent">Notification</div>
+    </div>
+
+    <script>
+        // Utility Functions
+        const $ = (id) => document.getElementById(id);
+
+        // Theme Management
+        const themeToggle = $('themeToggle');
+        const body = document.body;
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            body.classList.remove('light');
+        } else {
+            body.classList.add('light');
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                body.classList.remove('light');
+            } else {
+                body.classList.add('light');
+            }
+        });
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light');
+        });
+
+        // URL Parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const prefilledHash = urlParams.get('hash');
+        if (prefilledHash) {
+            $('callHash').value = prefilledHash;
+        }
+
+        // Toast Notification
+        function showToast(icon, message) {
+            const toast = $('toast');
+            const toastIcon = $('toastIcon');
+            const toastContent = $('toastContent');
+
+            toastIcon.textContent = icon;
+            toastContent.textContent = message;
+            toast.classList.add('active');
+
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        // Error Banner
+        function showError(message) {
+            const errorBanner = $('errorBanner');
+            errorBanner.textContent = message;
+            errorBanner.classList.add('active');
+        }
+
+        function hideError() {
+            $('errorBanner').classList.remove('active');
+        }
+
+        // Modal
+        let modalCallback = null;
+
+        function showModal(title, text, confirmText = 'Confirm', onConfirm) {
+            $('modalTitle').textContent = title;
+            $('modalText').textContent = text;
+            $('modalConfirm').textContent = confirmText;
+            $('modalOverlay').classList.add('active');
+            modalCallback = onConfirm;
+        }
+
+        function hideModal() {
+            $('modalOverlay').classList.remove('active');
+            modalCallback = null;
+        }
+
+        $('modalCancel').addEventListener('click', hideModal);
+        $('modalConfirm').addEventListener('click', () => {
+            if (modalCallback) modalCallback();
+            hideModal();
+        });
+
+        $('modalOverlay').addEventListener('click', (e) => {
+            if (e.target === $('modalOverlay')) hideModal();
+        });
+
+        // Connecting Simulation
+        function simulateConnection() {
+            return new Promise((resolve) => {
+                $('connectingOverlay').classList.add('active');
+
+                const steps = [
+                    { step: 1, delay: 500 },
+                    { step: 2, delay: 1200 },
+                    { step: 3, delay: 1800 },
+                    { step: 4, delay: 2400 }
+                ];
+
+                steps.forEach(({ step, delay }) => {
+                    setTimeout(() => {
+                        const stepEl = document.querySelector(`[data-step="${step}"]`);
+                        stepEl.classList.add('active');
+
+                        setTimeout(() => {
+                            stepEl.classList.remove('active');
+                            stepEl.classList.add('done');
+                            stepEl.querySelector('.step-icon').textContent = '✓';
+                        }, 500);
+                    }, delay);
+                });
+
+                setTimeout(() => {
+                    $('connectingOverlay').classList.remove('active');
+                    resolve();
+                }, 3200);
+            });
+        }
+
+        // Form Submission
+        $('joinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+
+            const callHash = $('callHash').value.trim().toUpperCase();
+            const displayName = $('displayName').value.trim();
+
+            // Strict validation - only accept the specific hash
+            const VALID_HASH = 'LG-XE2NTXCI-30148';
+
+            if (callHash !== VALID_HASH) {
+                showError('🚫 Access Denied: Invalid session hash code. Please verify your credentials.');
+                return;
+            }
+
+            if (displayName.length < 2) {
+                showError('❌ Name must be at least 2 characters');
+                return;
+            }
+
+            // Simulate Connection
+            await simulateConnection();
+
+            // Update Call Screen
+            const initial = displayName.charAt(0).toUpperCase();
+            $('videoAvatar').textContent = initial;
+            $('videoName').textContent = displayName;
+            $('videoInfo').textContent = displayName;
+            $('callHashDisplay').textContent = callHash;
+
+            // Switch Screens
+            $('joinScreen').style.display = 'none';
+            $('callScreen').classList.add('active');
+
+            // Reset connecting steps
+            setTimeout(() => {
+                document.querySelectorAll('.connecting-step').forEach(step => {
+                    step.classList.remove('active', 'done');
+                    step.querySelector('.step-icon').textContent = step.dataset.step;
+                });
+            }, 500);
+
+            // Start Timer
+            startCallTimer();
+
+            showToast('✅', 'Connected successfully');
+
+            // Show Wire Connect Section after 2 seconds
+            setTimeout(() => {
+                $('wireConnectSection').classList.add('active');
+                showToast('🔒', 'Secure messaging option available');
+            }, 2000);
+        });
+
+        // Call Timer
+        let timerInterval = null;
+        let seconds = 0;
+
+        function startCallTimer() {
+            seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                const secs = (seconds % 60).toString().padStart(2, '0');
+                $('callTimer').textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopCallTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        // Call Controls
+        let micMuted = false;
+        let cameraOff = false;
+        let screenSharing = false;
+
+        $('micBtn').addEventListener('click', () => {
+            micMuted = !micMuted;
+            $('micBtn').classList.toggle('active', micMuted);
+            $('micBtn').textContent = micMuted ? '🔇' : '🎤';
+            showToast(micMuted ? '🔇' : '🎤', micMuted ? 'Microphone muted' : 'Microphone unmuted');
+        });
+
+        $('cameraBtn').addEventListener('click', () => {
+            cameraOff = !cameraOff;
+            $('cameraBtn').classList.toggle('active', cameraOff);
+            $('cameraBtn').textContent = cameraOff ? '📷' : '📹';
+            showToast(cameraOff ? '📷' : '📹', cameraOff ? 'Camera stopped' : 'Camera started');
+        });
+
+        $('screenBtn').addEventListener('click', () => {
+            screenSharing = !screenSharing;
+            $('screenBtn').classList.toggle('active', screenSharing);
+            showToast(screenSharing ? '🖥️' : '💻', screenSharing ? 'Screen sharing started' : 'Screen sharing stopped');
+        });
+
+        // Leave Call
+        $('leaveBtn').addEventListener('click', () => {
+            showModal(
+                'Leave Call',
+                'Are you sure you want to leave this call?',
+                'Leave',
+                () => {
+                    stopCallTimer();
+                    $('callScreen').classList.remove('active');
+                    $('joinScreen').style.display = 'flex';
+                    $('joinForm').reset();
+
+                    // Reset states
+                    micMuted = false;
+                    cameraOff = false;
+                    screenSharing = false;
+                    $('micBtn').classList.remove('active');
+                    $('cameraBtn').classList.remove('active');
+                    $('screenBtn').classList.remove('active');
+                    $('micBtn').textContent = '🎤';
+                    $('cameraBtn').textContent = '📹';
+
+                    // Hide Wire Connect Section
+                    $('wireConnectSection').classList.remove('active');
+
+                    showToast('👋', 'You left the call');
+                }
+            );
+        });
+    </script>
+</body>
+</html>
+
