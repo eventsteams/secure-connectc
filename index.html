@@ -3,1267 +3,818 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lion's Gate Corporation | Meeting Rescheduling</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Meeting Rescheduling - Joan Luiser</title>
     <style>
-        :root {
-            --dark-bg: #0a0e17;
-            --premium-purple: #6c63ff;
-            --deep-blue: #1a237e;
-            --electric-blue: #2979ff;
-            --silver-accent: #b0bec5;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --liquid-accent: rgba(108, 99, 255, 0.3);
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #0a0e17 0%, #1a1f35 50%, #0a0e17 100%);
-            color: #ffffff;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
         }
         
-        /* Liquid water glass background effects */
-        .liquid-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .liquid-drop {
-            position: absolute;
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.15;
-            animation: float 20s infinite linear;
-        }
-        
-        .liquid-drop:nth-child(1) {
-            width: 500px;
-            height: 500px;
-            top: -200px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-        
-        .liquid-drop:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -5s;
-            background: linear-gradient(135deg, var(--electric-blue), #00bcd4);
-        }
-        
-        .liquid-drop:nth-child(3) {
-            width: 300px;
-            height: 300px;
-            top: 50%;
-            left: 70%;
-            animation-delay: -10s;
-        }
-        
-        .glass-morph {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            border-radius: 24px;
-        }
-        
-        /* Main container styling */
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 30px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Header with premium branding */
-        .corporate-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 0;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
+            background: white;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            overflow: hidden;
         }
         
-        .logo-text h1 {
-            font-size: 28px;
-            background: linear-gradient(to right, #ffffff, var(--silver-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .logo-text p {
-            color: var(--silver-accent);
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-        
-        .status-badge {
-            padding: 8px 20px;
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 152, 0, 0.2));
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #ffc107;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Meeting details card */
-        .meeting-card {
-            padding: 40px;
-            margin-bottom: 40px;
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            padding: 35px 30px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .meeting-card::before {
+        .header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--premium-purple), var(--electric-blue));
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
         }
         
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-        
-        .card-title h2 {
-            font-size: 28px;
-            font-weight: 500;
+        .header h1 {
+            font-size: 32px;
             margin-bottom: 10px;
-            background: linear-gradient(to right, #ffffff, var(--silver-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-weight: 600;
+            position: relative;
         }
         
-        .card-title p {
-            color: var(--silver-accent);
+        .header p {
             font-size: 16px;
-            max-width: 600px;
+            opacity: 0.9;
+            position: relative;
         }
         
-        .priority-tag {
-            padding: 8px 20px;
-            background: linear-gradient(135deg, rgba(233, 30, 99, 0.2), rgba(156, 39, 176, 0.2));
-            border: 1px solid rgba(233, 30, 99, 0.3);
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #e91e63;
-        }
-        
-        .participants-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+        .content {
+            padding: 40px;
         }
         
         .participant-card {
-            padding: 25px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            transition: transform 0.3s ease;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3949ab;
         }
         
-        .participant-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .participant-avatar {
-            width: 80px;
-            height: 80px;
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--glass-border);
-            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
         }
         
-        .participant-avatar.avatar-joan {
-            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-        }
-        
-        .participant-avatar.avatar-keanu {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-        
-        .participant-info h3 {
-            font-size: 22px;
-            font-weight: 500;
+        .participant-info h2 {
+            color: #1a237e;
             margin-bottom: 5px;
+            font-size: 24px;
         }
         
         .participant-info p {
-            color: var(--silver-accent);
-            font-size: 14px;
-            margin-bottom: 8px;
+            color: #666;
+            font-size: 16px;
         }
         
-        .participant-role {
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--liquid-accent);
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
+        .meeting-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 1px solid #e9ecef;
         }
         
-        .meeting-details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .detail-item {
-            padding: 20px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
         
-        .detail-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--silver-accent);
-            margin-bottom: 8px;
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            width: 180px;
+            min-width: 180px;
         }
         
-        .detail-value {
-            font-size: 18px;
-            font-weight: 500;
+        .info-value {
+            flex: 1;
+            color: #333;
         }
         
         .missed-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            background: #fff3e0;
+            color: #e65100;
             padding: 8px 16px;
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(233, 30, 99, 0.2));
-            border: 1px solid rgba(244, 67, 54, 0.3);
-            border-radius: 6px;
-            color: #f44336;
+            border-radius: 20px;
             font-size: 14px;
             font-weight: 500;
-            margin-top: 15px;
+            margin-top: 5px;
         }
         
-        /* Action buttons section */
-        .action-section {
-            text-align: center;
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .action-title {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 30px;
-            color: #ffffff;
-        }
-        
-        .action-buttons {
+        .buttons {
             display: flex;
+            gap: 20px;
+            margin: 40px 0;
             justify-content: center;
-            gap: 30px;
             flex-wrap: wrap;
         }
         
-        .action-btn {
-            padding: 22px 50px;
+        button {
+            padding: 18px 40px;
             border: none;
-            border-radius: 16px;
-            font-size: 18px;
+            border-radius: 10px;
+            font-size: 17px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s;
+            min-width: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            min-width: 280px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            gap: 10px;
         }
         
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .action-btn:hover::before {
-            left: 100%;
-        }
-        
-        .btn-accept {
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
+        .accept-btn {
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
             color: white;
-            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.3);
         }
         
-        .btn-accept:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.6);
+        .accept-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 176, 155, 0.4);
         }
         
-        .btn-decline {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+        .decline-btn {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
             color: white;
-            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
         }
         
-        .btn-decline:hover {
-            transform: translateY(-8px);
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(233, 30, 99, 0.1));
-            border-color: rgba(244, 67, 54, 0.3);
+        .decline-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
         }
         
-        /* Reschedule form */
-        .reschedule-form {
-            padding: 40px;
+        .form-section {
             display: none;
+            padding: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-top: 20px;
+            background: #fafafa;
         }
         
-        .form-header {
+        .form-title {
+            color: #1a237e;
+            margin-bottom: 25px;
+            font-size: 24px;
             text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .form-header h2 {
-            font-size: 28px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #ffffff, var(--silver-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
         }
         
         .form-group {
-            position: relative;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 500;
-            color: #ffffff;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 18px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--premium-purple);
-            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
-        }
-        
-        .calendar-container {
-            grid-column: span 2;
-            padding: 30px;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 25px;
         }
         
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 12px;
-        }
-        
-        .calendar-day {
-            padding: 15px;
-            text-align: center;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid transparent;
-        }
-        
-        .calendar-day.header {
+        label {
+            display: block;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: var(--silver-accent);
-            cursor: default;
-            background: transparent;
-            border: none;
+            color: #444;
+            font-size: 16px;
         }
         
-        .calendar-day.available:hover {
-            background: rgba(108, 99, 255, 0.2);
-            border-color: var(--premium-purple);
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
         
-        .calendar-day.selected {
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
-            color: white;
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3949ab;
+            box-shadow: 0 0 0 3px rgba(57, 73, 171, 0.1);
         }
         
-        .calendar-day.unavailable {
-            opacity: 0.3;
-            cursor: not-allowed;
-            text-decoration: line-through;
-        }
-        
-        .time-slots {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        
-        .time-slot {
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .time-slot:hover {
-            background: rgba(108, 99, 255, 0.2);
-            border-color: var(--premium-purple);
-        }
-        
-        .time-slot.selected {
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
-            color: white;
-            border-color: var(--premium-purple);
+        textarea {
+            resize: vertical;
+            min-height: 120px;
         }
         
         .form-actions {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 15px;
             margin-top: 40px;
         }
         
-        /* Confirmation screen */
-        .confirmation-screen {
-            padding: 60px 40px;
-            text-align: center;
+        .back-btn {
+            background: #757575;
+            color: white;
+            padding: 15px 30px;
+        }
+        
+        .confirm-btn {
+            background: linear-gradient(135deg, #3949ab 0%, #1a237e 100%);
+            color: white;
+            flex: 1;
+            padding: 15px 30px;
+        }
+        
+        .confirmation {
             display: none;
+            padding: 40px;
+            text-align: center;
         }
         
         .confirmation-icon {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--premium-purple), var(--electric-blue));
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 30px;
-            font-size: 40px;
-            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
-        }
-        
-        .confirmation-title {
-            font-size: 32px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            background: linear-gradient(to right, #ffffff, var(--silver-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .confirmation-details {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 40px;
-            text-align: left;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.03);
-        }
-        
-        .screenshot-note {
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(56, 142, 60, 0.1));
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            border-radius: 12px;
-            color: #4caf50;
-        }
-        
-        .management-notification {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(30, 136, 229, 0.1));
-            border: 1px solid rgba(33, 150, 243, 0.3);
-            border-radius: 12px;
-            color: #2196f3;
-        }
-        
-        /* Footer */
-        .corporate-footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            border-top: 1px solid var(--glass-border);
-            color: var(--silver-accent);
-            font-size: 14px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        
-        .footer-link {
-            color: var(--silver-accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-link:hover {
             color: white;
+            font-size: 36px;
+            box-shadow: 0 6px 20px rgba(0, 176, 155, 0.3);
         }
         
-        /* Animations */
+        .confirmation h2 {
+            color: #1a237e;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .confirmation-info {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: left;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .email-btn {
+            background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+        }
+        
+        .email-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.4);
+        }
+        
+        .email-note {
+            margin-top: 20px;
+            color: #666;
+            font-size: 15px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3949ab;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+            background: #f8f9fa;
+        }
+        
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-30px) rotate(120deg);
-            }
-            66% {
-                transform: translateY(30px) rotate(240deg);
-            }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(20px, 20px) rotate(360deg); }
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+        @media (max-width: 600px) {
+            .content {
+                padding: 25px;
             }
             
-            .corporate-header {
+            .buttons {
                 flex-direction: column;
-                gap: 20px;
-                text-align: center;
             }
             
-            .action-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .action-btn {
+            button {
                 width: 100%;
-                max-width: 400px;
             }
             
-            .calendar-container {
-                grid-column: span 1;
+            .form-actions {
+                flex-direction: column;
             }
             
-            .participants-section {
-                grid-template-columns: 1fr;
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                width: 100%;
+                margin-bottom: 5px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Liquid background effects -->
-    <div class="liquid-bg">
-        <div class="liquid-drop"></div>
-        <div class="liquid-drop"></div>
-        <div class="liquid-drop"></div>
-    </div>
-    
     <div class="container">
-        <!-- Corporate Header -->
-        <header class="corporate-header glass-morph fade-in">
-            <div class="logo-section">
-                <div class="logo">LG</div>
-                <div class="logo-text">
-                    <h1>LION'S GATE CORPORATION</h1>
-                    <p>Premium Executive Services</p>
-                </div>
-            </div>
-            <div class="status-badge">
-                <i class="fas fa-exclamation-circle"></i>
-                RESCHEDULING REQUIRED
-            </div>
-        </header>
+        <div class="header">
+            <h1>Meeting Rescheduling System</h1>
+            <p>Missed Meeting Follow-up - Action Required</p>
+        </div>
         
-        <!-- Main Meeting Card -->
-        <section class="meeting-card glass-morph fade-in">
-            <div class="card-header">
-                <div class="card-title">
-                    <h2>Executive Meeting Rescheduling</h2>
-                    <p>You have been offered a second opportunity to schedule this important meeting. Please review the details and select your preferred action below.</p>
-                </div>
-                <div class="priority-tag">
-                    <i class="fas fa-star"></i> HIGH PRIORITY
+        <div class="content">
+            <div class="participant-card">
+                <div class="avatar">JL</div>
+                <div class="participant-info">
+                    <h2>Joan Luiser</h2>
+                    <p>Meeting Participant</p>
                 </div>
             </div>
             
-            <div class="missed-badge">
-                <i class="fas fa-clock"></i>
-                PREVIOUS MEETING MISSED: January 15, 2026
-            </div>
-            
-            <div class="participants-section">
-                <div class="participant-card glass-morph">
-                    <div class="participant-avatar avatar-joan">
-                        <!-- Would be an image in production -->
-                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:bold;color:white;">
-                            JL
+            <div class="meeting-info">
+                <div class="info-row">
+                    <div class="info-label">Original Meeting Date:</div>
+                    <div class="info-value">
+                        <strong>January 15, 2026</strong>
+                        <div class="missed-badge">
+                            <span style="margin-right: 8px;">⏰</span> Missed - Rescheduling Offered
                         </div>
                     </div>
-                    <div class="participant-info">
-                        <h3>Joan Luiser</h3>
-                        <p>Senior Creative Director</p>
-                        <p><i class="fas fa-envelope"></i> j.luiser@lionsgate.com</p>
-                        <span class="participant-role">MEETING PARTICIPANT</span>
-                    </div>
                 </div>
-                
-                <div class="participant-card glass-morph">
-                    <div class="participant-avatar avatar-keanu">
-                        <!-- Would be an image in production -->
-                        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:bold;color:white;">
-                            KR
-                        </div>
-                    </div>
-                    <div class="participant-info">
-                        <h3>Keanu Reeves</h3>
-                        <p>Principal Talent & Creative Partner</p>
-                        <p><i class="fas fa-envelope"></i> k.reeves@lionsgate.com</p>
-                        <span class="participant-role" style="background:rgba(79, 172, 254, 0.3);">MEETING HOST</span>
-                    </div>
+                <div class="info-row">
+                    <div class="info-label">Meeting With:</div>
+                    <div class="info-value">Executive Team</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Original Time:</div>
+                    <div class="info-value">2:00 PM - 4:00 PM</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Meeting Type:</div>
+                    <div class="info-value">Project Review & Planning</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Meeting ID:</div>
+                    <div class="info-value">MTG-2026-0115-JL</div>
                 </div>
             </div>
             
-            <div class="meeting-details-grid">
-                <div class="detail-item">
-                    <div class="detail-label">Original Meeting Date</div>
-                    <div class="detail-value">January 15, 2026</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Scheduled Time</div>
-                    <div class="detail-value">2:00 PM - 4:00 PM PST</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Meeting Duration</div>
-                    <div class="detail-value">120 Minutes</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Meeting Type</div>
-                    <div class="detail-value">Executive Creative Review</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Meeting ID</div>
-                    <div class="detail-value">LG-EXEC-2026-015</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Location</div>
-                    <div class="detail-value">Virtual (Zoom) / Santa Monica HQ</div>
-                </div>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h3 style="color: #1a237e; margin-bottom: 15px;">Select Your Action</h3>
+                <p style="color: #666;">This is your opportunity to reschedule the missed meeting or decline permanently.</p>
             </div>
-        </section>
-        
-        <!-- Action Section -->
-        <section class="action-section glass-morph fade-in" id="actionSection">
-            <h2 class="action-title">Select Your Preferred Action</h2>
-            <div class="action-buttons">
-                <button class="action-btn btn-accept" id="acceptBtn">
-                    <i class="fas fa-calendar-check"></i>
-                    <span>RESCHEDULE MEETING</span>
+            
+            <div class="buttons">
+                <button class="accept-btn" id="acceptBtn">
+                    <span style="font-size: 20px;">✓</span>
+                    Accept & Reschedule
                 </button>
-                <button class="action-btn btn-decline" id="declineBtn">
-                    <i class="fas fa-calendar-times"></i>
-                    <span>DECLINE & TERMINATE</span>
+                <button class="decline-btn" id="declineBtn">
+                    <span style="font-size: 20px;">✗</span>
+                    Decline Meeting
                 </button>
             </div>
-            <p style="margin-top: 25px; color: var(--silver-accent); font-size: 14px;">
-                <i class="fas fa-info-circle"></i> Please note: This is your final opportunity to schedule this meeting
-            </p>
-        </section>
-        
-        <!-- Reschedule Form (Hidden Initially) -->
-        <section class="reschedule-form glass-morph fade-in" id="rescheduleForm">
-            <div class="form-header">
-                <h2>Reschedule Executive Meeting</h2>
-                <p>Select your preferred date and time for the rescheduled meeting with Keanu Reeves</p>
-            </div>
             
-            <div class="form-grid">
+            <!-- Reschedule Form -->
+            <div class="form-section" id="rescheduleForm">
+                <h2 class="form-title">Select New Meeting Details</h2>
+                
                 <div class="form-group">
-                    <label class="form-label">Preferred Meeting Date</label>
-                    <div class="calendar-container">
-                        <div class="calendar-header">
-                            <button class="form-control" style="width:auto;padding:10px 20px;cursor:pointer;" id="prevMonth">
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <h3 id="currentMonth">February 2026</h3>
-                            <button class="form-control" style="width:auto;padding:10px 20px;cursor:pointer;" id="nextMonth">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                        <div class="calendar-grid" id="calendar">
-                            <!-- Calendar will be generated by JavaScript -->
-                        </div>
-                    </div>
+                    <label for="date">Preferred Date:</label>
+                    <input type="date" id="date" min="2026-01-16" value="2026-01-20">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Preferred Time Slot</label>
-                    <div class="time-slots" id="timeSlots">
-                        <!-- Time slots will be generated by JavaScript -->
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Meeting Duration</label>
-                    <select class="form-control" id="duration">
-                        <option value="60">60 Minutes</option>
-                        <option value="90" selected>90 Minutes</option>
-                        <option value="120">120 Minutes</option>
+                    <label for="time">Preferred Time:</label>
+                    <select id="time">
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM" selected>11:00 AM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="3:00 PM">3:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Meeting Format</label>
-                    <select class="form-control" id="format">
-                        <option value="virtual">Virtual Meeting (Zoom)</option>
-                        <option value="in-person">In-Person (Santa Monica HQ)</option>
-                        <option value="hybrid">Hybrid (Virtual & In-Person)</option>
+                    <label for="duration">Meeting Duration:</label>
+                    <select id="duration">
+                        <option value="30">30 minutes</option>
+                        <option value="60" selected>60 minutes</option>
+                        <option value="90">90 minutes</option>
+                        <option value="120">120 minutes</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Additional Notes (Optional)</label>
-                    <textarea class="form-control" id="notes" rows="4" placeholder="Any specific topics or requirements for the meeting..."></textarea>
+                    <label for="notes">Additional Notes (Optional):</label>
+                    <textarea id="notes" placeholder="Any specific topics you'd like to cover, preferred format (virtual/in-person), or special requirements..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="back-btn" id="backBtn">← Back</button>
+                    <button class="confirm-btn" id="confirmBtn">Confirm Rescheduling</button>
                 </div>
             </div>
             
-            <div class="form-actions">
-                <button class="action-btn btn-decline" id="cancelReschedule">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>CANCEL</span>
+            <!-- Reschedule Confirmation Screen -->
+            <div class="confirmation" id="confirmationScreen">
+                <div class="confirmation-icon">✓</div>
+                <h2>Meeting Successfully Rescheduled!</h2>
+                
+                <div class="confirmation-info">
+                    <div class="info-row">
+                        <div class="info-label">Participant:</div>
+                        <div class="info-value">Joan Luiser</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">New Date:</div>
+                        <div class="info-value" id="confirmDate">January 20, 2026</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">New Time:</div>
+                        <div class="info-value" id="confirmTime">11:00 AM</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Duration:</div>
+                        <div class="info-value" id="confirmDuration">60 minutes</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Meeting ID:</div>
+                        <div class="info-value">MTG-2026-0120-JL-R</div>
+                    </div>
+                </div>
+                
+                <p style="margin: 20px 0; color: #555; font-size: 16px;">
+                    Your meeting has been rescheduled. Please send confirmation to complete the process.
+                </p>
+                
+                <button class="email-btn" id="emailBtn">
+                    <span style="font-size: 20px;">📧</span>
+                    Open Email to Lionsgate
                 </button>
-                <button class="action-btn btn-accept" id="confirmReschedule">
-                    <i class="fas fa-check-circle"></i>
-                    <span>CONFIRM RESCHEDULING</span>
+                
+                <div class="email-note">
+                    <strong>Note:</strong> Clicking this button will open your email client with a pre-filled message to <strong>org.lionsgate@gmail.com</strong>. Just click "Send" to complete the process.
+                </div>
+            </div>
+            
+            <!-- Decline Confirmation Screen -->
+            <div class="confirmation" id="declineScreen">
+                <div class="confirmation-icon" style="background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);">✗</div>
+                <h2>Meeting Declined</h2>
+                
+                <div class="confirmation-info">
+                    <div class="info-row">
+                        <div class="info-label">Participant:</div>
+                        <div class="info-value">Joan Luiser</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Original Date:</div>
+                        <div class="info-value">January 15, 2026</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Status:</div>
+                        <div class="info-value" style="color: #ff416c;">Declined & Terminated</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Reference ID:</div>
+                        <div class="info-value">DEC-2026-0115-JL</div>
+                    </div>
+                </div>
+                
+                <p style="margin: 20px 0; color: #555; font-size: 16px;">
+                    You have chosen to decline this meeting. Please notify the team to complete the process.
+                </p>
+                
+                <button class="email-btn" id="declineEmailBtn">
+                    <span style="font-size: 20px;">📧</span>
+                    Open Email to Lionsgate
                 </button>
-            </div>
-        </section>
-        
-        <!-- Confirmation Screen (Hidden Initially) -->
-        <section class="confirmation-screen glass-morph fade-in" id="confirmationScreen">
-            <div class="confirmation-icon">
-                <i class="fas fa-check"></i>
-            </div>
-            <h2 class="confirmation-title">Meeting Successfully Rescheduled!</h2>
-            <p style="color: var(--silver-accent); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
-                Your meeting with Keanu Reeves has been rescheduled. A confirmation has been sent to your email and the management team has been notified.
-            </p>
-            
-            <div class="confirmation-details">
-                <h3 style="margin-bottom: 20px; color: white;">Meeting Details</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <div class="detail-label">Meeting ID</div>
-                        <div class="detail-value">LG-EXEC-2026-015-R</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Rescheduled Date</div>
-                        <div class="detail-value" id="confirmedDate">February 20, 2026</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Time</div>
-                        <div class="detail-value" id="confirmedTime">2:00 PM PST</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Duration</div>
-                        <div class="detail-value" id="confirmedDuration">90 Minutes</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Format</div>
-                        <div class="detail-value" id="confirmedFormat">Virtual Meeting (Zoom)</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Confirmation Code</div>
-                        <div class="detail-value">LG-CNF-8X4P-2Q9R</div>
-                    </div>
+                
+                <div class="email-note">
+                    <strong>Note:</strong> Clicking this button will open your email client with a pre-filled message to <strong>org.lionsgate@gmail.com</strong>. Just click "Send" to complete the process.
                 </div>
             </div>
-            
-            <div class="screenshot-note">
-                <i class="fas fa-camera"></i> 
-                <strong>RECOMMENDED:</strong> Please take a screenshot of this confirmation for your records. This page will not be accessible again.
-            </div>
-            
-            <div class="management-notification">
-                <i class="fas fa-paper-plane"></i> 
-                <strong>MANAGEMENT NOTIFIED:</strong> Keanu Reeves and the Executive Office have been automatically notified of this rescheduling.
-            </div>
-            
-            <button class="action-btn btn-accept" style="margin-top: 40px; max-width: 300px;" id="doneButton">
-                <i class="fas fa-check-circle"></i>
-                <span>COMPLETE</span>
-            </button>
-        </section>
+        </div>
         
-        <!-- Decline Screen (Hidden Initially) -->
-        <section class="confirmation-screen glass-morph fade-in" id="declineScreen" style="display: none;">
-            <div class="confirmation-icon" style="background: linear-gradient(135deg, #f44336, #e91e63);">
-                <i class="fas fa-times"></i>
-            </div>
-            <h2 class="confirmation-title">Meeting Declined & Terminated</h2>
-            <p style="color: var(--silver-accent); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
-                You have chosen to decline this meeting opportunity. The meeting request has been permanently terminated and removed from the system.
-            </p>
-            
-            <div class="confirmation-details">
-                <h3 style="margin-bottom: 20px; color: white;">Termination Details</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <div class="detail-label">Meeting ID</div>
-                        <div class="detail-value">LG-EXEC-2026-015</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Original Date</div>
-                        <div class="detail-value">January 15, 2026</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Declined By</div>
-                        <div class="detail-value">Joan Luiser</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Declined On</div>
-                        <div class="detail-value" id="declineDate">February 5, 2026</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Status</div>
-                        <div class="detail-value" style="color: #f44336;">TERMINATED</div>
-                    </div>
-                    <div>
-                        <div class="detail-label">Reference Code</div>
-                        <div class="detail-value">LG-TRM-7B3N-5D8F</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="management-notification" style="background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(233, 30, 99, 0.1)); border-color: rgba(244, 67, 54, 0.3); color: #f44336;">
-                <i class="fas fa-exclamation-triangle"></i> 
-                <strong>MANAGEMENT NOTIFIED:</strong> Keanu Reeves and the Executive Office have been automatically notified of this termination. This meeting will not be reoffered.
-            </div>
-            
-            <button class="action-btn btn-decline" style="margin-top: 40px; max-width: 300px;" id="declineDoneButton">
-                <i class="fas fa-times-circle"></i>
-                <span>ACKNOWLEDGE</span>
-            </button>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="corporate-footer">
-            <p>© 2026 Lion's Gate Corporation. All Rights Reserved.</p>
-            <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">Confidential & Proprietary - For Internal Use Only</p>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-                <a href="#" class="footer-link">Executive Support</a>
-                <a href="#" class="footer-link">Contact HR</a>
-            </div>
-        </footer>
+        <div class="footer">
+            <p>© 2026 Meeting Management System | For: Joan Luiser</p>
+            <p style="margin-top: 8px; font-size: 13px; color: #888;">This is a one-time rescheduling opportunity for the missed meeting on January 15, 2026</p>
+        </div>
     </div>
 
     <script>
         // DOM Elements
-        const actionSection = document.getElementById('actionSection');
+        const acceptBtn = document.getElementById('acceptBtn');
+        const declineBtn = document.getElementById('declineBtn');
         const rescheduleForm = document.getElementById('rescheduleForm');
         const confirmationScreen = document.getElementById('confirmationScreen');
         const declineScreen = document.getElementById('declineScreen');
-        const calendar = document.getElementById('calendar');
-        const timeSlots = document.getElementById('timeSlots');
-        const currentMonth = document.getElementById('currentMonth');
-        const prevMonthBtn = document.getElementById('prevMonth');
-        const nextMonthBtn = document.getElementById('nextMonth');
+        const backBtn = document.getElementById('backBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const declineEmailBtn = document.getElementById('declineEmailBtn');
         
-        // State variables
-        let selectedDate = null;
-        let selectedTime = null;
-        let currentMonthIndex = 1; // February (0-indexed)
-        let currentYear = 2026;
+        // Form elements
+        const dateInput = document.getElementById('date');
+        const timeSelect = document.getElementById('time');
+        const durationSelect = document.getElementById('duration');
+        const notesInput = document.getElementById('notes');
         
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set up event listeners
-            document.getElementById('acceptBtn').addEventListener('click', showRescheduleForm);
-            document.getElementById('declineBtn').addEventListener('click', showDeclineScreen);
-            document.getElementById('cancelReschedule').addEventListener('click', cancelReschedule);
-            document.getElementById('confirmReschedule').addEventListener('click', confirmRescheduling);
-            document.getElementById('doneButton').addEventListener('click', () => {
-                alert('Process completed. This page can now be closed.');
-                // In a real application, this would redirect or close the window
-            });
-            document.getElementById('declineDoneButton').addEventListener('click', () => {
-                alert('Meeting termination acknowledged. This page can now be closed.');
-                // In a real application, this would redirect or close the window
-            });
-            
-            // Calendar navigation
-            prevMonthBtn.addEventListener('click', () => changeMonth(-1));
-            nextMonthBtn.addEventListener('click', () => changeMonth(1));
-            
-            // Initialize calendar and time slots
-            generateCalendar(currentMonthIndex, currentYear);
-            generateTimeSlots();
-            
-            // Set today's date for decline confirmation
-            const now = new Date();
+        // Confirmation display elements
+        const confirmDate = document.getElementById('confirmDate');
+        const confirmTime = document.getElementById('confirmTime');
+        const confirmDuration = document.getElementById('confirmDuration');
+        
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Format date for email
+        function formatDateForEmail(dateString) {
+            const date = new Date(dateString);
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('declineDate').textContent = now.toLocaleDateString('en-US', options);
-        });
+            return date.toLocaleDateString('en-US', options);
+        }
         
         // Show reschedule form
-        function showRescheduleForm() {
-            actionSection.style.display = 'none';
+        acceptBtn.addEventListener('click', () => {
+            document.querySelector('.buttons').style.display = 'none';
             rescheduleForm.style.display = 'block';
-            rescheduleForm.classList.add('fade-in');
-        }
+            
+            // Set minimum date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+            
+            // Set default to 3 days from now
+            const defaultDate = new Date();
+            defaultDate.setDate(defaultDate.getDate() + 3);
+            dateInput.value = defaultDate.toISOString().split('T')[0];
+        });
         
         // Show decline screen
-        function showDeclineScreen() {
-            if (confirm("Are you sure you want to decline and permanently terminate this meeting? This action cannot be undone.")) {
-                actionSection.style.display = 'none';
+        declineBtn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to decline this meeting? This action cannot be undone.')) {
+                document.querySelector('.buttons').style.display = 'none';
                 declineScreen.style.display = 'block';
-                declineScreen.classList.add('fade-in');
-                
-                // Simulate sending termination notification to management
-                simulateManagementNotification('terminated');
             }
-        }
+        });
         
-        // Cancel rescheduling and go back
-        function cancelReschedule() {
+        // Go back to main screen
+        backBtn.addEventListener('click', () => {
             rescheduleForm.style.display = 'none';
-            actionSection.style.display = 'block';
-        }
+            document.querySelector('.buttons').style.display = 'flex';
+        });
         
         // Confirm rescheduling
-        function confirmRescheduling() {
-            if (!selectedDate || !selectedTime) {
-                alert("Please select both a date and time for the meeting.");
+        confirmBtn.addEventListener('click', () => {
+            // Validate inputs
+            if (!dateInput.value) {
+                alert('Please select a date for the meeting.');
                 return;
             }
             
-            // Update confirmation details
-            const dateStr = selectedDate.toLocaleDateString('en-US', { 
-                weekday: 'long', 
+            // Update confirmation display
+            confirmDate.textContent = formatDate(dateInput.value);
+            confirmTime.textContent = timeSelect.value;
+            confirmDuration.textContent = durationSelect.options[durationSelect.selectedIndex].text;
+            
+            // Show confirmation screen
+            rescheduleForm.style.display = 'none';
+            confirmationScreen.style.display = 'block';
+        });
+        
+        // Function to create email content for RESCHEDULING
+        function createRescheduleEmail() {
+            const date = formatDateForEmail(dateInput.value);
+            const time = timeSelect.value;
+            const duration = durationSelect.options[durationSelect.selectedIndex].text;
+            const notes = notesInput.value;
+            const today = new Date().toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
             });
             
-            document.getElementById('confirmedDate').textContent = dateStr;
-            document.getElementById('confirmedTime').textContent = selectedTime;
-            document.getElementById('confirmedDuration').textContent = 
-                document.getElementById('duration').options[document.getElementById('duration').selectedIndex].text;
-            document.getElementById('confirmedFormat').textContent = 
-                document.getElementById('format').options[document.getElementById('format').selectedIndex].text;
+            const subject = encodeURIComponent(`Meeting Rescheduled - Joan Luiser - MTG-2026-0120-JL-R`);
             
-            // Show confirmation screen
-            rescheduleForm.style.display = 'none';
-            confirmationScreen.style.display = 'block';
-            confirmationScreen.classList.add('fade-in');
+            const body = encodeURIComponent(
+`To: org.lionsgate@gmail.com
+From: Joan Luiser
+Date: ${today}
+
+Dear Lionsgate Team,
+
+I am writing to confirm the rescheduling of the meeting that was originally scheduled for January 15, 2026, which I was unable to attend.
+
+I have selected the following new meeting details:
+
+NEW MEETING DETAILS:
+• Participant: Joan Luiser
+• New Date: ${date}
+• New Time: ${time}
+• Duration: ${duration}
+• Meeting ID: MTG-2026-0120-JL-R
+${notes ? `\nADDITIONAL NOTES:\n${notes}\n` : ''}
+
+Please confirm if this time works for the Executive Team, or suggest an alternative if needed.
+
+Thank you for your understanding and flexibility.
+
+Best regards,
+
+Joan Luiser
+---
+This is an automated confirmation from the Meeting Rescheduling System.`
+            );
             
-            // Simulate sending confirmation notification to management
-            simulateManagementNotification('rescheduled');
+            return `mailto:org.lionsgate@gmail.com?subject=${subject}&body=${body}`;
+        }
+        
+        // Function to create email content for DECLINING
+        function createDeclineEmail() {
+            const today = new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
             
-            // Simulate taking automatic screenshot (visual feedback)
+            const subject = encodeURIComponent(`Meeting Declined - Joan Luiser - DEC-2026-0115-JL`);
+            
+            const body = encodeURIComponent(
+`To: org.lionsgate@gmail.com
+From: Joan Luiser
+Date: ${today}
+
+Dear Lionsgate Team,
+
+I am writing to formally decline the meeting that was scheduled for January 15, 2026, which I was unable to attend.
+
+MEETING DETAILS:
+• Participant: Joan Luiser
+• Original Date: January 15, 2026
+• Original Time: 2:00 PM - 4:00 PM
+• Meeting ID: MTG-2026-0115-JL
+• Status: Declined & Terminated
+• Reference ID: DEC-2026-0115-JL
+
+I apologize for any inconvenience this may cause. At this time, I am unable to reschedule this meeting.
+
+Thank you for your understanding.
+
+Sincerely,
+
+Joan Luiser
+---
+This is an automated notification from the Meeting Rescheduling System.`
+            );
+            
+            return `mailto:org.lionsgate@gmail.com?subject=${subject}&body=${body}`;
+        }
+        
+        // Open email client for RESCHEDULING confirmation
+        emailBtn.addEventListener('click', () => {
+            const emailLink = createRescheduleEmail();
+            
+            // Open the email client
+            window.location.href = emailLink;
+            
+            // Update button to show success
             setTimeout(() => {
-                const screenshotNote = document.querySelector('.screenshot-note');
-                screenshotNote.style.transform = 'scale(1.05)';
-                screenshotNote.style.transition = 'transform 0.3s ease';
-                screenshotNote.style.boxShadow = '0 0 20px rgba(76, 175, 80, 0.5)';
+                emailBtn.innerHTML = '<span style="font-size: 20px;">✓</span> Email Opened - Ready to Send';
+                emailBtn.style.background = 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)';
                 
+                // Show completion message
                 setTimeout(() => {
-                    screenshotNote.style.transform = 'scale(1)';
-                    screenshotNote.style.boxShadow = 'none';
+                    const completionMsg = document.createElement('div');
+                    completionMsg.style.cssText = `
+                        background: #e8f5e9;
+                        color: #2e7d32;
+                        padding: 15px;
+                        border-radius: 8px;
+                        margin-top: 20px;
+                        border-left: 4px solid #4caf50;
+                        text-align: center;
+                    `;
+                    completionMsg.innerHTML = `
+                        <strong>✓ Process Complete</strong><br>
+                        Email to <strong>org.lionsgate@gmail.com</strong> is ready to send.<br>
+                        <small>Close this window after sending your email.</small>
+                    `;
+                    
+                    emailBtn.parentNode.insertBefore(completionMsg, emailBtn.nextSibling);
+                    emailBtn.disabled = true;
                 }, 1000);
-            }, 500);
-        }
+            }, 100);
+        });
         
-        // Generate calendar
-        function generateCalendar(month, year) {
-            calendar.innerHTML = '';
+        // Open email client for DECLINE notification
+        declineEmailBtn.addEventListener('click', () => {
+            const emailLink = createDeclineEmail();
             
-            // Set month name
-            const monthNames = ["January", "February", "March", "April", "May", "June", 
-                               "July", "August", "September", "October", "November", "December"];
-            currentMonth.textContent = `${monthNames[month]} ${year}`;
+            // Open the email client
+            window.location.href = emailLink;
             
-            // Create day headers
-            const dayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-            dayHeaders.forEach(day => {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day header';
-                dayElement.textContent = day;
-                calendar.appendChild(dayElement);
-            });
-            
-            // Get first day of month and number of days
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            
-            // Add empty cells for days before the first day
-            for (let i = 0; i < firstDay; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.className = 'calendar-day';
-                calendar.appendChild(emptyDay);
-            }
-            
-            // Add days of the month
-            const today = new Date();
-            const currentDate = today.getDate();
-            const currentMonthIdx = today.getMonth();
-            const currentYearNow = today.getFullYear();
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day available';
-                dayElement.textContent = day;
-                
-                // Create date object for this day
-                const date = new Date(year, month, day);
-                
-                // Mark unavailable days (past dates, weekends, and some random days)
-                const dayOfWeek = date.getDay();
-                const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-                const isPast = date < new Date();
-                const isUnavailable = isPast || isWeekend || day % 7 === 0 || day % 9 === 0;
-                
-                if (isUnavailable) {
-                    dayElement.className = 'calendar-day unavailable';
-                    dayElement.style.cursor = 'not-allowed';
-                } else {
-                    dayElement.addEventListener('click', () => selectDate(dayElement, date));
-                }
-                
-                // Mark today if applicable
-                if (day === currentDate && month === currentMonthIdx && year === currentYearNow) {
-                    dayElement.style.border = '2px solid var(--electric-blue)';
-                    dayElement.style.fontWeight = 'bold';
-                }
-                
-                // Mark selected date
-                if (selectedDate && 
-                    selectedDate.getDate() === day && 
-                    selectedDate.getMonth() === month && 
-                    selectedDate.getFullYear() === year) {
-                    dayElement.classList.add('selected');
-                }
-                
-                calendar.appendChild(dayElement);
-            }
-        }
-        
-        // Change month for calendar
-        function changeMonth(direction) {
-            currentMonthIndex += direction;
-            
-            // Handle year change
-            if (currentMonthIndex < 0) {
-                currentMonthIndex = 11;
-                currentYear--;
-            } else if (currentMonthIndex > 11) {
-                currentMonthIndex = 0;
-                currentYear++;
-            }
-            
-            generateCalendar(currentMonthIndex, currentYear);
-        }
-        
-        // Select a date on the calendar
-        function selectDate(dayElement, date) {
-            // Remove selection from all days
-            document.querySelectorAll('.calendar-day').forEach(day => {
-                day.classList.remove('selected');
-            });
-            
-            // Add selection to clicked day
-            dayElement.classList.add('selected');
-            selectedDate = date;
-            
-            // Enable time slots
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.style.opacity = '1';
-                slot.style.cursor = 'pointer';
-            });
-        }
-        
-        // Generate time slots
-        function generateTimeSlots() {
-            const times = [
-                "9:00 AM", "10:00 AM", "11:00 AM", 
-                "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"
-            ];
-            
-            timeSlots.innerHTML = '';
-            
-            times.forEach(time => {
-                const timeSlot = document.createElement('div');
-                timeSlot.className = 'time-slot';
-                timeSlot.textContent = time;
-                
-                // Mark some time slots as unavailable
-                if (time === "9:00 AM" || time === "4:00 PM") {
-                    timeSlot.style.opacity = '0.5';
-                    timeSlot.style.cursor = 'not-allowed';
-                    timeSlot.style.textDecoration = 'line-through';
-                } else {
-                    timeSlot.addEventListener('click', () => selectTime(timeSlot, time));
-                }
-                
-                timeSlots.appendChild(timeSlot);
-            });
-        }
-        
-        // Select a time slot
-        function selectTime(timeSlot, time) {
-            // Remove selection from all time slots
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.classList.remove('selected');
-            });
-            
-            // Add selection to clicked time slot
-            timeSlot.classList.add('selected');
-            selectedTime = time;
-        }
-        
-        // Simulate sending notification to management
-        function simulateManagementNotification(type) {
-            console.log(`Sending ${type} notification to management...`);
-            console.log(`To: Keanu Reeves, Executive Office, HR Department`);
-            console.log(`Subject: Meeting ${type.toUpperCase()} - LG-EXEC-2026-015`);
-            console.log(`Body: Joan Luiser has ${type} the meeting scheduled for January 15, 2026.`);
-            
-            // Show a brief notification in the UI
-            const notification = document.createElement('div');
-            notification.className = 'management-notification';
-            notification.style.position = 'fixed';
-            notification.style.top = '20px';
-            notification.style.right = '20px';
-            notification.style.zIndex = '1000';
-            notification.style.maxWidth = '300px';
-            notification.style.animation = 'fadeIn 0.5s ease';
-            notification.innerHTML = `<i class="fas fa-paper-plane"></i> Notification sent to management team`;
-            
-            document.body.appendChild(notification);
-            
+            // Update button to show success
             setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.style.opacity = '0';
-                    notification.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.parentNode.removeChild(notification);
-                        }
-                    }, 500);
-                }
-            }, 3000);
-        }
+                declineEmailBtn.innerHTML = '<span style="font-size: 20px;">✓</span> Email Opened - Ready to Send';
+                declineEmailBtn.style.background = 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)';
+                
+                // Show completion message
+                setTimeout(() => {
+                    const completionMsg = document.createElement('div');
+                    completionMsg.style.cssText = `
+                        background: #e8f5e9;
+                        color: #2e7d32;
+                        padding: 15px;
+                        border-radius: 8px;
+                        margin-top: 20px;
+                        border-left: 4px solid #4caf50;
+                        text-align: center;
+                    `;
+                    completionMsg.innerHTML = `
+                        <strong>✓ Process Complete</strong><br>
+                        Email to <strong>org.lionsgate@gmail.com</strong> is ready to send.<br>
+                        <small>Close this window after sending your email.</small>
+                    `;
+                    
+                    declineEmailBtn.parentNode.insertBefore(completionMsg, declineEmailBtn.nextSibling);
+                    declineEmailBtn.disabled = true;
+                }, 1000);
+            }, 100);
+        });
+        
+        // Initialize date to 3 days from now
+        window.onload = function() {
+            const defaultDate = new Date();
+            defaultDate.setDate(defaultDate.getDate() + 3);
+            dateInput.value = defaultDate.toISOString().split('T')[0];
+            
+            // Set min date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+        };
     </script>
 </body>
 </html>
